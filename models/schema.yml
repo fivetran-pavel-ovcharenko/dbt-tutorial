@@ -1,33 +1,33 @@
 version: 2
 
 models:
-  - name: customers
+  - name: names
     columns:
-      - name: customer_id
+      - name: id
         tests:
           - unique
           - not_null
 
-  - name: stg_customers
+  - name: stg_names
     columns:
-      - name: customer_id
+      - name: id
         tests:
           - unique
           - not_null
 
-  - name: stg_orders
+  - name: stg_roles
     columns:
-      - name: order_id
+      - name: id
         tests:
           - unique
-          - not_null
-      - name: status
-        tests:
-          - accepted_values:
-              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
-      - name: customer_id
-        tests:
           - not_null
           - relationships:
-              to: ref('stg_customers')
-              field: customer_id
+              to: ref('stg_names')
+              field: role
+      - name: name
+        tests:
+          - accepted_values:
+              values: ['Applicant', 'Member']
+      - name: description
+        tests:
+          - not_null
